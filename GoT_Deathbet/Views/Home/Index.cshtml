@@ -4,11 +4,11 @@
 <div class="container-fluid">
     <div class="row text-center">
         <div class="col-sm-5 ">
-            <figure class="Left_Slide" id="1111111"><img src="https://upload.wikimedia.org/wikipedia/en/3/39/Arya_Stark-Maisie_Williams.jpg" /><figcaption>HAHA</figcaption></figure>
+            <figure class="Left_Slide" id="1111111"><img src="https://upload.wikimedia.org/wikipedia/en/3/39/Arya_Stark-Maisie_Williams.jpg" width="300"/><figcaption>HAHA</figcaption></figure>
         </div>
         <div class="col-sm-2">VS.</div>
         <div class="col-sm-5">
-            <figure class="Right_Slide" id="1111111"><img src="https://upload.wikimedia.org/wikipedia/en/f/fa/Bran_Stark_-_Isaac_Hempstead-Wright.jpeg" /><figcaption>HAHA</figcaption></figure>
+            <figure class="Right_Slide" id="1111111"><img src="https://upload.wikimedia.org/wikipedia/en/f/fa/Bran_Stark_-_Isaac_Hempstead-Wright.jpeg" width="300"/><figcaption>HAHA</figcaption></figure>
         </div>
     </div>
 </div>
@@ -22,16 +22,32 @@
         $(".Right_Slide").click(function () {
             Handle_Win(1);
         });
+        Match_Setup();
     });
+    function Match_Setup()
+    {
+        var url = "/api/Vote/Get_Dual"
+        $.getJSON(url, function (data) {
+            $(".Left_Slide").attr("id", data[0].ID);
+            $(".Left_Slide img").attr("src", data[0].image_URL);
+            $(".Left_Slide figcaption").text(data[0].name);
+
+            $(".Right_Slide").attr("id", data[1].ID);
+            $(".Right_Slide img").attr("src", data[1].image_URL);
+            $(".Right_Slide figcaption").text(data[1].name);
+        });
+    }
+
     function Handle_Win(winner) {
         var url = "";
         if (winner === 0) {
-            url = "api/Vote/Post?id=0&Winner_id=" + $(".Left_Slide").attr("id") + "&Loser_id=" + $(".Right_Slide").attr("id");
+            url = "/api/Vote/Post_Result?id=0&Winner_id=" + $(".Left_Slide").attr("id") + "&Loser_id=" + $(".Right_Slide").attr("id");
         }
         if (winner === 1) {
-            url = "api/Vote/Post?id=0&Winner_id=" + $(".Right_Slide").attr("id") + "&Loser_id=" + $(".Left_Slide").attr("id");
+            url = "/api/Vote/Post_Result?id=0&Winner_id=" + $(".Right_Slide").attr("id") + "&Loser_id=" + $(".Left_Slide").attr("id");
         }
         $.post(url);
+        Match_Setup();
     }
 
 </script>
