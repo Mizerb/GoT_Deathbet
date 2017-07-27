@@ -4,11 +4,34 @@
 <div class="container-fluid">
     <div class="row text-center">
         <div class="col-sm-5 ">
-            <figure class="Left_Slide"><img src="https://upload.wikimedia.org/wikipedia/en/3/39/Arya_Stark-Maisie_Williams.jpg" /><figcaption>HAHA</figcaption></figure>
+            <figure class="Left_Slide" id="1111111"><img src="https://upload.wikimedia.org/wikipedia/en/3/39/Arya_Stark-Maisie_Williams.jpg" /><figcaption>HAHA</figcaption></figure>
         </div>
         <div class="col-sm-2">VS.</div>
         <div class="col-sm-5">
-            <figure class="Left_Slide"><img src="https://upload.wikimedia.org/wikipedia/en/f/fa/Bran_Stark_-_Isaac_Hempstead-Wright.jpeg" /><figcaption>HAHA</figcaption></figure>
+            <figure class="Right_Slide" id="1111111"><img src="https://upload.wikimedia.org/wikipedia/en/f/fa/Bran_Stark_-_Isaac_Hempstead-Wright.jpeg" /><figcaption>HAHA</figcaption></figure>
         </div>
     </div>
 </div>
+
+<script src="/Scripts/jquery-1.10.2.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".Left_Slide").click(function () {
+            Handle_Win(0);
+        });
+        $(".Right_Slide").click(function () {
+            Handle_Win(1);
+        });
+    });
+    function Handle_Win(winner) {
+        var url = "";
+        if (winner === 0) {
+            url = "api/Vote/Post?id=0&Winner_id=" + $(".Left_Slide").attr("id") + "&Loser_id=" + $(".Right_Slide").attr("id");
+        }
+        if (winner === 1) {
+            url = "api/Vote/Post?id=0&Winner_id=" + $(".Right_Slide").attr("id") + "&Loser_id=" + $(".Left_Slide").attr("id");
+        }
+        $.post(url);
+    }
+
+</script>
