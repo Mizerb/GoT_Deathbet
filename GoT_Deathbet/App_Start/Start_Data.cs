@@ -35,23 +35,23 @@ namespace GoT_Deathbet
                 if (!System.IO.File.Exists(database_name))
                 {
                     create_db();
-                }
-                var db = new SQLiteAsyncConnection(database_name);
-                await db.CreateTableAsync<Candidate>();
+                    var db = new SQLiteAsyncConnection(database_name);
+                    await db.CreateTableAsync<Candidate>();
 
-                XDocument data = XDocument.Load(starter_xml);
-                var chars = data.Descendants().Where(x => x.Name == "Character");
+                    XDocument data = XDocument.Load(starter_xml);
+                    var chars = data.Descendants().Where(x => x.Name == "Character");
 
-                foreach (var person in chars)
-                {
-                    var cand = new Candidate
+                    foreach (var person in chars)
                     {
-                        name = person.Element("Name").Value,
-                        elo = int.Parse(person.Element("Elo").Value),
-                        image_URL = person.Element("Image").Value,
-                        ID = Guid.NewGuid()
-                    };
-                    db.InsertAsync(cand);
+                        var cand = new Candidate
+                        {
+                            name = person.Element("Name").Value,
+                            elo = int.Parse(person.Element("Elo").Value),
+                            image_URL = person.Element("Image").Value,
+                            ID = Guid.NewGuid()
+                        };
+                        db.InsertAsync(cand);
+                    }
                 }
             }
             catch (Exception e)
