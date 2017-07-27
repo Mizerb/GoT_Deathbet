@@ -18,6 +18,7 @@ namespace GoT_Deathbet
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            Start_Data.Prepare_Data();
         }
     }
 }

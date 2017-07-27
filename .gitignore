@@ -243,3 +243,4 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+GoT_Deathbet/App_Data/db.sqlite

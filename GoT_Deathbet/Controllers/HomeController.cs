@@ -10,7 +10,7 @@ namespace GoT_Deathbet.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Title = "Home Page";
+            //ViewBag.Title = "Home Page";
 
             return View();
         }
