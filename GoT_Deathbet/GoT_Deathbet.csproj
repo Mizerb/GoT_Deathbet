@@ -177,6 +177,8 @@
     <Compile Include="App_Start\Start_Data.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\RankController.cs" />
+    <Compile Include="Controllers\RankingController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Controllers\VoteController.cs" />
     <Compile Include="Global.asax.cs">
