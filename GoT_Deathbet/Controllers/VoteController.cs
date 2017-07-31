@@ -63,8 +63,12 @@ namespace GoT_Deathbet.Controllers
                 {
                     //Udpate 
                     //do some maths
-                    var Winner = db.Table<Candidate>().Where(x => x.ID == Guid.Parse(Winner_id)).FirstOrDefault();
-                    var Loser = db.Table<Candidate>().Where(x => x.ID == Guid.Parse(Loser_id)).First();
+                    var Winner_guid = Guid.Parse(Winner_id);
+                    var Loser_guid = Guid.Parse(Loser_id);
+
+
+                    var Winner = db.Table<Candidate>().Where(x => x.ID == Winner_guid).FirstOrDefault();
+                    var Loser = db.Table<Candidate>().Where(x => x.ID == Loser_guid).FirstOrDefault();
 
                     int Win_Elo = Winner.elo; // Going to write function
                     int Loser_Elo = Loser.elo; // Going to write function
@@ -74,15 +78,22 @@ namespace GoT_Deathbet.Controllers
 
                     var e1 = r1 / (r1 + r2);
                     var e2 = r2 / (r2 + r1);
-
-                    Winner.elo = Win_Elo + K_Factor * (int)(1 - e1);
-                    Loser.elo = Loser_Elo + K_Factor * (int)(0 - e1);
+                    
+                    Winner.elo = (int)(Win_Elo + K_Factor * (1 - e1));
+                    Loser.elo = (int)(Loser_Elo + K_Factor * (0 - e2));
 
                     //Task.Factory.StartNew(() =>
                     //{
                         db.Update(Winner);
                         db.Update(Loser);
                     //});
+                    /*
+                    var check_win = db.Table<Candidate>().Where(x => x.ID == Winner_guid).FirstOrDefault();
+                    if(check_win.elo != Winner.elo)
+                    {
+                        throw new Exception("FUFUUFUFUFCKKK");
+                    }
+                    */
 
                 }
             }
