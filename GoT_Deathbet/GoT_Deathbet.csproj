@@ -177,7 +177,7 @@
     <Compile Include="App_Start\Start_Data.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\RankController.cs" />
+    <Compile Include="Controllers\RankAPIController.cs" />
     <Compile Include="Controllers\RankingController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Controllers\VoteController.cs" />
@@ -211,7 +211,9 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -225,7 +227,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Ranking\Ranking.cshtml" />
+    <Content Include="Views\Ranking\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

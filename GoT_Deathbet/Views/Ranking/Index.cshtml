@@ -1,0 +1,32 @@
+﻿<h2> Ranks </h2>
+
+
+
+<div class="ranking" >
+    <table id="data">
+        <tbody>
+            <tr>
+                <th></th>
+                <th>Character</th>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<script src="/Scripts/jquery-1.10.2.js"></script>
+<script>
+    function Populate_table()
+    {
+        var url = "/api/RankAPI/getRanks";
+        $.getJSON(url, function (data) {
+            for (var i = 0; i < data.length; i++) {
+                $("#data tbody").append(
+                    "<tr><td>" + (i+1) + "</td><td>" + data[i].name + "</td></tr>");
+            }
+        });
+    }
+
+    $(document).ready(function () {
+        Populate_table();
+    })
+</script>

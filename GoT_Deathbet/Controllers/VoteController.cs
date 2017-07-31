@@ -78,11 +78,11 @@ namespace GoT_Deathbet.Controllers
                     Winner.elo = Win_Elo + K_Factor * (int)(1 - e1);
                     Loser.elo = Loser_Elo + K_Factor * (int)(0 - e1);
 
-                    Task.Factory.StartNew(() =>
-                    {
+                    //Task.Factory.StartNew(() =>
+                    //{
                         db.Update(Winner);
                         db.Update(Loser);
-                    });
+                    //});
 
                 }
             }
