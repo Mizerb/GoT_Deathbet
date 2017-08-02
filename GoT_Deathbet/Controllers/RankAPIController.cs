@@ -13,12 +13,20 @@ namespace GoT_Deathbet.Controllers
     {
         const string database_name = @"C:\CODE\git\GoT_Deathbet\GoT_Deathbet\App_Data\db.sqlite";
 
-        public JsonResult<Candidate[]> GetRanks()
+        public JsonResult<List<Candidate>> GetRanks()
         {
-            using (SQLite.SQLiteConnection db = new SQLite.SQLiteConnection(database_name))
+            try
             {
-                return Json(db.Table<Candidate>().OrderByDescending(x => x.elo).Take(20).ToArray());
+                SQLite.SQLiteAsyncConnection db = new SQLite.SQLiteAsyncConnection(database_name);
+                return Json(db.Table<Candidate>().OrderByDescending(x => x.elo).Take(20).ToListAsync().Result);
+            
             }
+            catch( Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return null;
         }
 
     }
