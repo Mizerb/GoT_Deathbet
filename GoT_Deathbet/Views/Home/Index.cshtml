@@ -41,6 +41,28 @@
             $(".Right_Slide").attr("id", data[1].ID);
             $(".Right_Slide img").attr("src", data[1].image_URL);
             $(".Right_Slide figcaption").text(data[1].name);
+
+            Load();
+
+        });
+    }
+    
+
+
+    var images = new Array();
+    function preload( sources){
+        for (var i = 0 ; i < sources ; i++) {
+            images[i] = new Image();
+            images[i].src = preload.arguments[i];
+        }
+    }
+
+    function Load() {
+        var source_list = new Array();
+        var url = "/api/RankAPI/getRanks";
+        $.getJSON(url, function (data) {
+            source_list[i] = data[i].image_URL;
+            preload(source_list);
         });
     }
 
