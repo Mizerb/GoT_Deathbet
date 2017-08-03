@@ -1,19 +1,23 @@
-﻿<h2>Vote</h2>
+﻿<h2>Vote: Who is next to die?</h2>
 
 
 <div class="container-fluid">
     <div class="row text-center">
         <div class="col-sm-5 ">
             <figure class="Left_Slide" id="1111111">
-                <img src="https://upload.wikimedia.org/wikipedia/en/3/39/Arya_Stark-Maisie_Williams.jpg" width="300"/>
-                <figcaption style="font-size:larger">HAHA</figcaption>
-            </figure>
+                <div  class="shadow">
+                    <img class="bottom" src="https://upload.wikimedia.org/wikipedia/en/3/39/Arya_Stark-Maisie_Williams.jpg" width="300" height="500"/>
+                    <figcaption style="font-size:larger"></figcaption>
+                </div>
+             </figure>
         </div>
         <div class="col-sm-2">VS.</div>
         <div class="col-sm-5">
             <figure class="Right_Slide" id="1111111">
-                <img src="https://upload.wikimedia.org/wikipedia/en/f/fa/Bran_Stark_-_Isaac_Hempstead-Wright.jpeg" width="300"/>
-                <figcaption style="font-size:larger">HAHA</figcaption>
+                <div  class="shadow">
+                    <img class="bottom" src="https://upload.wikimedia.org/wikipedia/en/f/fa/Bran_Stark_-_Isaac_Hempstead-Wright.jpeg" width="300" height="500" />
+                    <figcaption style="font-size:larger"></figcaption>
+                </div>
             </figure>
         </div>
     </div>
@@ -28,22 +32,22 @@
         $(".Right_Slide").click(function () {
             Handle_Win(1);
         });
+        Load();
         Match_Setup();
     });
     function Match_Setup()
     {
         var url = "/api/Vote/Get_Dual"
         $.getJSON(url, function (data) {
+            
             $(".Left_Slide").attr("id", data[0].ID);
-            $(".Left_Slide img").attr("src", data[0].image_URL);
+            $(".Left_Slide img.bottom").attr("src", data[0].image_URL);
             $(".Left_Slide figcaption").text(data[0].name);
 
             $(".Right_Slide").attr("id", data[1].ID);
-            $(".Right_Slide img").attr("src", data[1].image_URL);
+            $(".Right_Slide img.bottom").attr("src", data[1].image_URL);
             $(".Right_Slide figcaption").text(data[1].name);
-
-            Load();
-
+            $(".shadow").fadeTo("slow", 1);
         });
     }
     
@@ -75,7 +79,10 @@
             url = "/api/Vote/Post_Result?id=0&Winner_id=" + $(".Right_Slide").attr("id") + "&Loser_id=" + $(".Left_Slide").attr("id");
         }
         $.post(url);
-        Match_Setup();
+        $(".shadow").fadeTo("slow", .001, function () {
+            Match_Setup()
+        });
+
     }
 
 </script>
