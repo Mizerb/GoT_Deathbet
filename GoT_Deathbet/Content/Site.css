@@ -1,7 +1,7 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
-    background: black;
+    background: linear-gradient(white , #182E3C);
 }
 
 /* Set padding to keep content from hitting the edges */
